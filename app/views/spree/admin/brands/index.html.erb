@@ -1,0 +1,78 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::Brand) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_brand), new_object_url, { class: 'btn-success', icon: 'add', id: 'admin_new_brand' } %>
+<% end if can?(:create, Spree::Brand) %>
+
+<% content_for :table_filter do %>
+  <div data-hook='admin_brands_sidebar'>
+
+    <%= search_form_for [:admin, @search] do |f| %>
+      <%- locals = {:f => f} %>
+      <div data-hook='admin_brands_index_search' class='row'>
+        <div class='col-md-6'>
+          <div class='form-group'>
+            <%= f.label :name_cont, Spree.t(:name) %>
+            <%= f.text_field :name_cont, :size => 15, class: 'form-control js-quick-search-target' %>
+          </div>
+        </div>
+      </div>
+      <div data-hook='admin_brands_index_search_buttons' class='form-actions'>
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
+
+<% if @collection.any? %>
+  <table class='table' id='listing_brands'>
+    <thead>
+      <tr data-hook='admin_brands_index_headers'>
+        <th>
+          <%= sort_link @search, :name, Spree.t(:name), { default_order: 'desc' }, { title: 'admin_brands_listing_name_title' } %>
+        </th>
+        <th>
+          <%= sort_link @search, :available_on, Spree.t(:available_on), {}, { title: 'admin_brands_listing_price_title' } %>
+        </th>
+        <th>
+          <%= Spree.t(:status) %>
+        </th>
+        <th>
+          <%= Spree.t(:description) %>
+        </th>
+        <th class='actions' data-hook='admin_brands_index_header_actions'></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @collection.each do |brand| %>
+        <tr id='<%= spree_dom_id brand %>' data-hook='admin_brands_index_rows' class='<%= cycle('odd', 'even') %>'>
+          <td class='name'>
+            <%= brand.name %>
+          </td>
+          <td class='available-on'>
+            <%= datepicker_field_value(brand.available_on) %>
+          </td>
+          <td class='status'>
+            <%= brand.active? %>
+          </td>
+          <td class='description'>
+            <%= brand.description %>
+          </td>
+          <td class='actions actions-2 text-right' data-hook='admin_brands_index_row_actions'>
+            <%= link_to_edit brand, no_text: true, class: 'edit' if can?(:edit, brand) && !brand.deleted? %>
+            <%= link_to_delete brand, no_text: true if can?(:delete, brand) && !brand.deleted? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class='alert alert-info no-objects-found'>
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Brand)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+<% end %>
