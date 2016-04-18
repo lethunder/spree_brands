@@ -4,6 +4,8 @@ module Spree
       include Spree::Admin::BaseHelper
       rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
+      before_action :load_brand, only: [:edit, :destroy]
+
       def index
         respond_with(@collection)
       end
@@ -19,8 +21,6 @@ module Spree
       end
 
       def destroy
-        @brand = Spree::Brand.find(params[:id])
-
         if @brand.destroy
           flash[:success] = Spree.t('notice_messages.brand_deleted')
         else
@@ -44,8 +44,15 @@ module Spree
           :name,
           :available_on,
           :description,
-          :active
+          :active,
+          :published,
+          :image,
+          :position
         ]
+      end
+
+      def load_brand
+        @brand = Spree::Brand.find(params[:id])
       end
 
       def collection

@@ -29,11 +29,4 @@ bundle
 bundle exec rake
 ```
 
-When testing your applications integration with this extension you may use it's factories.
-Simply add this require statement to your spec_helper:
-
-```ruby
-require 'spree_brands/factories'
-```
-
 Copyright (c) 2016 [name of extension creator], released under the New BSD License

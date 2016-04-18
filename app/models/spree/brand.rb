@@ -4,6 +4,8 @@
 module Spree
   class Brand < Spree::Base
     validates :name, :description, :available_on, presence: true
+    has_attached_file :image
+    validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
 
     # use deleted? rather than checking the attribute directly. this
     # allows extensions to override deleted? if they want to provide
@@ -25,6 +27,11 @@ module Spree
     def active?
       active == true ? Spree.t(:active) : Spree.t(:disabled)
     end
+
+    def brand_image
+      !image.file? && brand.present? && brand.images.any? ? brand.images.first.attachment : image
+    end
+
   end
 end
 
