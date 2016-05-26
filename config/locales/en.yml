@@ -3,8 +3,8 @@
 
 en:
   spree:
-    brands: Brands
     brand: Brand
+    brands: Brands
     active: Active
     disabled: Disabled
     add_one: Add one
@@ -12,3 +12,7 @@ en:
     notice_messages:
       brand_deleted: Your brand has been deleted
       brand_not_deleted: Something went wrong, please try again
+    admin:
+      tab:
+        brands: Brands
+        brand: Brand

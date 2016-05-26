@@ -3,8 +3,8 @@
 
 es-MX:
   spree:
-    brands: Marcas
     brand: Marca
+    brands: Marcas
     active: Activo
     disabled: Desactivado
     add_one: Agregar una
@@ -12,3 +12,7 @@ es-MX:
     notice_messages:
       brand_deleted: La marca ha sido eliminada
       brand_not_deleted: Hubo un error, por favor intentalo de nuevo
+    admin:
+      tab:
+        brands: Marcas
+        brand: Marca
