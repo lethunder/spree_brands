@@ -3,4 +3,12 @@
 
 en:
   spree:
+    brands: Brands
+    brand: Brand
+    active: Active
+    disabled: Disabled
+    add_one: Add one
     new_brand: New Brand
+    notice_messages:
+      brand_deleted: Your brand has been deleted
+      brand_not_deleted: Something went wrong, please try again
