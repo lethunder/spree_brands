@@ -9,6 +9,7 @@ en:
     disabled: Disabled
     add_one: Add one
     new_brand: New Brand
+    editing_resource: Editing %{resource}
     notice_messages:
       brand_deleted: Your brand has been deleted
       brand_not_deleted: Something went wrong, please try again
@@ -16,3 +17,7 @@ en:
       tab:
         brands: Brands
         brand: Brand
+    models:
+      spree/brand:
+        one: Brand
+        other: Brands

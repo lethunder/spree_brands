@@ -9,6 +9,7 @@ es-MX:
     disabled: Desactivado
     add_one: Agregar una
     new_brand: Nueva Marca
+    editing_resource: Editando %{resource}
     notice_messages:
       brand_deleted: La marca ha sido eliminada
       brand_not_deleted: Hubo un error, por favor intentalo de nuevo
@@ -16,3 +17,7 @@ es-MX:
       tab:
         brands: Marcas
         brand: Marca
+    models:
+      spree/brand:
+        one: Marca
+        other: Marcas
