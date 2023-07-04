@@ -38,9 +38,6 @@
           <%= sort_link @search, :name, Spree.t(:name), { default_order: 'desc' }, { title: 'admin_brands_listing_name_title' } %>
         </th>
         <th>
-          <%= sort_link @search, :available_on, Spree.t(:available_on), {}, { title: 'admin_brands_listing_price_title' } %>
-        </th>
-        <th>
           <%= Spree.t(:status) %>
         </th>
         <th>
@@ -54,13 +51,10 @@
       <% @collection.each do |brand| %>
         <tr id='<%= spree_dom_id brand %>' data-hook='admin_brands_index_rows' class='<%= cycle('odd', 'even') %>'>
           <td class='align-center'>
-            <%= image_tag brand.brand_image, class: 'img-responsive', style: 'width: 100px; height: auto;' %>
+            <%= image_tag image_path(main_app.url_for(brand.image)), class: 'img-responsive', style: 'width: 100px; height: auto;' if brand.image.attached? %>
           </td>
           <td class='name'>
             <%= brand.name %>
-          </td>
-          <td class='available-on'>
-            <%= datepicker_field_value(brand.available_on) %>
           </td>
           <td class='status'>
             <%= brand.active? %>

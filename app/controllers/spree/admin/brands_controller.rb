@@ -42,12 +42,9 @@ module Spree
       def permitted_attributes
         [
           :name,
-          :available_on,
           :description,
           :active,
-          :published,
-          :image,
-          :position
+          :image
         ]
       end
 
@@ -62,8 +59,8 @@ module Spree
 
         @search = Spree::Brand.ransack(params[:q])
         @collection = @search.result.
-              page(params[:page]).
-              per(Spree::Config[:properties_per_page])
+          page(params[:page]).
+          per(params[:per_page] || Spree::Backend::Config[:admin_products_per_page])
       end
 
     end

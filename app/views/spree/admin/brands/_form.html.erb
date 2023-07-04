@@ -7,14 +7,6 @@
     <% end %>
   </div>
 
-  <div class='col-md-2' data-hook='admin_brand_form_available_on'>
-    <%= f.field_container :available_on, class: ['form-group'] do %>
-      <%= f.label :available_on, raw(Spree.t(:available_on) + content_tag(:span, ' *', class: 'required')) %>
-      <%= f.text_field :available_on, value: datepicker_field_value(@brand.available_on), class: 'datepicker form-control' %>
-      <%= f.error_message_on :available_on %>
-    <% end %>
-  </div>
-
   <div class='col-md-2' data-hook='admin_brand_form_active' >
     <%= f.field_container :active, class: ['form-group'] do %>
       <%= f.label :active, Spree.t(:active) %>
@@ -39,8 +31,10 @@
 
   <div class='col-md-3'>
     <%= f.field_container :image, class: ['form-group'] do %>
-      <% if f.object.image? %>
-        <p><%= image_tag f.object.image, class: 'img-responsive', style: 'max-width: 100%; height: auto;' %></p>
+      <% if f.object.image.attached? %>
+        <p>
+          <%= image_tag image_path(main_app.url_for(f.object.image)), class: 'img-responsive', style: 'width: 100px; height: auto;' %>
+        </p>
       <% end %>
     <% end %>
   </div>
